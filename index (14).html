@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free CV & Resume Keyword Checker: Match Your CV to a Job</title>
+<meta name="description" content="Free CV and resume keyword checker. Paste your CV and a job description to see missing keywords and a transparent match score. Private, in your browser.">
+<link rel="canonical" href="https://byshak.github.io/cv-job-match-analyzer/">
+<style>
+:root{--paper:#f3eee3;--ink:#15120f;--hl:#ffe24a;--mint:#bdf0cf;--lilac:#d9d2ff;--ok:#0a6b3a;--okbg:#bdf0cf;--warn:#8a5200;--warnbg:#ffe9a8;--bad:#a8200d;--badbg:#ffc9c0;--mute:#5d564c;--serif:"Iowan Old Style","Palatino Linotype",Georgia,serif;--mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sh:5px 5px 0 var(--ink)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font:16px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:var(--paper) radial-gradient(rgba(21,18,15,.13) 1px,transparent 1px) 0 0/22px 22px;overflow-x:hidden}
+::selection{background:var(--hl)}
+.wrap{max-width:1040px;margin:0 auto;padding:0 18px}
+.sr{position:absolute;left:-9999px}
+a{color:inherit}
+:focus-visible{outline:3px solid #2b50ff;outline-offset:2px}
+header{position:sticky;top:0;z-index:20;background:rgba(21,18,15,.92);color:var(--paper);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:12px}
+.logo{display:flex;align-items:center;gap:10px;font:700 1.3rem var(--serif);text-decoration:none}
+nav{display:none;gap:26px;font:600 12px var(--mono);letter-spacing:.1em;text-transform:uppercase}
+nav a{color:#cfc8ba;text-decoration:none}nav a:hover{color:var(--hl)}
+@media(min-width:700px){nav{display:flex}}
+.btn{display:inline-block;background:var(--hl);color:var(--ink);border:2px solid var(--ink);box-shadow:4px 4px 0 var(--ink);padding:13px 26px;font:700 15px/1.2 system-ui;border-radius:6px;text-decoration:none;cursor:pointer;transition:transform .15s,box-shadow .15s}
+.btn:hover:not(:disabled){transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}.btn:disabled{opacity:.6;cursor:wait}
+.btn.sm{padding:8px 16px;font-size:14px;border-color:var(--hl);box-shadow:none}
+.ghost{background:transparent;border:2px solid currentColor;color:inherit;padding:11px 20px;border-radius:6px;font:600 15px system-ui;cursor:pointer;text-decoration:none;display:inline-block}
+.ghost:hover{background:var(--hl);color:var(--ink);border-color:var(--ink)}.ghost.small{font-size:13px;padding:3px 12px}
+.hero{background:radial-gradient(50% 60% at 82% 20%,rgba(255,226,74,.13),transparent),var(--ink);color:var(--paper);padding:56px 0 110px;clip-path:polygon(0 0,100% 0,100% 93%,0 100%)}
+.hero .btn{border-color:var(--paper);box-shadow:4px 4px 0 var(--paper)}.hero .btn:hover{box-shadow:2px 2px 0 var(--paper)}
+.hg{display:grid;gap:8px}
+@media(min-width:880px){.hg{grid-template-columns:1.1fr .9fr;align-items:center}}
+.eyebrow{font:600 12px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin:0 0 6px}
+.hero .eyebrow{color:var(--hl)}
+h1,h2,h3{font-family:var(--serif);letter-spacing:-.02em}
+h1{font-size:clamp(2.7rem,9.5vw,5.4rem);line-height:.98;margin:0 0 22px;font-weight:700}
+h2{font-size:clamp(1.8rem,5vw,2.8rem);line-height:1.05;margin:0 0 10px}
+h3{font-size:1.2rem;margin:0 0 8px}
+.mk{display:inline-block;background:var(--hl);color:var(--ink);padding:0 .14em;transform:rotate(-2deg)}
+.lead{color:#cfc8ba;font-size:1.12rem;max-width:30em;margin:0 0 28px}
+.cta{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.desk{position:relative;height:330px;margin-top:34px}
+@media(min-width:880px){.desk{height:430px;margin:0}}
+.paper{position:absolute;background:#fffdf7;color:var(--ink);border:2px solid var(--ink);border-radius:4px;padding:16px;box-shadow:7px 7px 0 #4a4337}
+.paper h4{margin:0 0 8px;font:600 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.paper p{margin:0;font-size:14.5px;line-height:1.7}
+.p1{left:0;top:0;width:min(80%,310px);transform:rotate(-4deg);animation:b1 7s ease-in-out infinite}
+.p2{right:0;top:105px;width:min(76%,290px);transform:rotate(3deg);animation:b2 8s ease-in-out infinite}
+.tick{display:inline-block;margin-top:10px;background:var(--mint);border:2px solid var(--ink);border-radius:99px;padding:0 10px;font:700 12px var(--mono)}
+.stk{position:absolute;left:34%;bottom:4px;width:92px;height:92px;border-radius:50%;background:#ff5a36;color:#fff;border:2px solid var(--ink);display:grid;place-items:center;text-align:center;font:700 12px/1.3 var(--mono);transform:rotate(-12deg);animation:wob 5s ease-in-out infinite}
+mark.h,mark.hit{background:var(--hl);color:inherit;padding:0 2px;border-radius:2px}
+mark.m,mark.miss{background:var(--badbg);color:inherit;text-decoration:underline wavy #e5391f;text-underline-offset:3px;padding:0 2px}
+@keyframes b1{50%{transform:translateY(-12px) rotate(-3deg)}}
+@keyframes b2{50%{transform:translateY(10px) rotate(4deg)}}
+@keyframes wob{50%{transform:rotate(-4deg) scale(1.06)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes mq{to{transform:translateX(-50%)}}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}}
+@keyframes grow{from{width:0}}
+.strip{background:var(--hl);border-block:2px solid var(--ink);overflow:hidden;white-space:nowrap;font:700 13px var(--mono);letter-spacing:.16em;padding:8px 0;transform:rotate(-1deg);margin:-62px -12px 10px;position:relative;z-index:2}
+.strip div{display:inline-block;animation:mq 30s linear infinite}
+section.blk{padding:44px 0 6px}
+.sub{color:var(--mute);margin:0 0 22px;max-width:38em}
+.grid2{display:grid;gap:24px}
+@media(min-width:800px){.grid2{grid-template-columns:1fr 1fr}}
+.panel{background:#fffdf7;border:2px solid var(--ink);border-radius:6px;box-shadow:var(--sh);overflow:hidden}
+.ph{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:2px solid var(--ink);background:var(--hl)}
+.panel.jd .ph{background:var(--lilac)}
+.ph .n{width:26px;height:26px;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center;font:700 13px var(--mono)}
+.ph label{flex:1;font:700 12px var(--mono);letter-spacing:.12em;text-transform:uppercase}
+.ph small{font:600 12px var(--mono)}
+.pb{padding:14px}
+.drop{border:2px dashed var(--ink);border-radius:6px;padding:12px;text-align:center;margin-bottom:12px;color:var(--mute);font-size:14px;background:rgba(255,226,74,.12)}
+.drop strong{display:block;color:var(--ink)}.drop.on{background:var(--hl)}
+textarea{display:block;width:100%;min-height:240px;border:0;padding:0;background:repeating-linear-gradient(transparent 0 25px,rgba(21,18,15,.12) 25px 26px) local;color:var(--ink);font:15px/26px system-ui;resize:vertical}
+textarea:focus{outline:0}.pb:focus-within{box-shadow:inset 0 0 0 3px var(--hl)}
+textarea::placeholder{color:#8a8277}
+.actions{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin:26px 0 8px}
+.actions .ghost{color:var(--ink)}
+#msg{color:var(--bad);font-weight:600;font-size:14px}
+@media(max-width:560px){.actions .btn{width:100%}.actions .ghost{flex:1}}
+.empty{text-align:center;padding:40px 16px;border:2px dashed var(--ink);border-radius:6px;color:var(--mute);background:rgba(255,253,247,.6)}
+.empty .r{width:64px;height:64px;margin:0 auto 12px;border:3px dashed var(--ink);border-radius:50%;animation:spin 14s linear infinite}
+.empty p{margin:0 auto;max-width:28em}
+#results{display:none}
+.card{background:#fffdf7;border:2px solid var(--ink);border-radius:6px;box-shadow:var(--sh);padding:20px;margin-bottom:26px;animation:rise .5s ease-out both}
+@media(min-width:760px){.card{padding:26px}}
+.card.dark{background:var(--ink);color:var(--paper);box-shadow:5px 5px 0 var(--hl)}
+.dark .note,.dark .row .h span:last-child,.dark .checks{color:#cfc8ba}
+.top{display:grid;gap:20px;align-items:center}
+@media(min-width:760px){.top{grid-template-columns:200px 1fr}}
+.ring{position:relative;width:170px;height:170px;margin:0 auto}
+.ring svg{transform:rotate(-90deg)}
+#arc{transition:stroke-dashoffset 1.2s cubic-bezier(.2,.8,.2,1)}
+.ring .num{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;font:700 3.6rem/1 var(--serif)}
+.ring .num small{font:600 11px var(--mono);color:#cfc8ba;margin-top:4px}
+.band{display:inline-block;font:700 13px var(--mono);letter-spacing:.06em;text-transform:uppercase;border:2px solid var(--ink);border-radius:99px;padding:2px 14px;margin-bottom:10px}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:22px 0 6px}
+@media(min-width:760px){.stats{grid-template-columns:repeat(4,1fr)}}
+.stat{border:2px solid var(--ink);border-radius:6px;padding:12px 14px;color:var(--ink);background:var(--hl);animation:rise .6s ease-out both}
+.stat:nth-child(2){background:var(--mint)}.stat:nth-child(3){background:var(--lilac)}.stat:nth-child(4){background:#ffc9c0}
+.stat b{display:block;font:700 1.9rem var(--serif)}.stat span{font:600 11px var(--mono);letter-spacing:.06em;text-transform:uppercase}
+.row{margin:16px 0}
+.row .h{display:flex;justify-content:space-between;gap:8px;font-size:14px;font-weight:700}
+.row .h span:last-child{font-weight:400}
+.bar{height:10px;background:rgba(255,255,255,.16);border-radius:99px;overflow:hidden;margin:6px 0}
+.bar i{display:block;height:100%;background:var(--hl);border-radius:99px;animation:grow 1s ease-out}
+.heat{white-space:pre-wrap;font-size:14px;line-height:1.9;max-height:360px;overflow:auto;border:2px solid var(--ink);border-radius:6px;padding:14px;background:#fff}
+.chips{display:flex;flex-wrap:wrap;gap:10px;padding:0;margin:0;list-style:none}
+.chips li{font-size:13px;padding:2px 12px;border-radius:99px;border:2px solid var(--ink);background:#fff}
+.chips li.sk{font-size:15px;font-weight:700;padding:4px 14px;box-shadow:3px 3px 0 var(--ink)}
+.chips li.sk::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:currentColor;margin-right:8px;vertical-align:middle}
+.chips.miss li{background:var(--badbg);color:var(--bad);border-style:dashed}
+.chips.have li{background:var(--okbg);color:var(--ok)}
+.note{font-size:13px;color:var(--mute);margin:10px 0 0}
+ul.list{padding-left:20px;margin:0}ul.list li{margin-bottom:8px}
+.bul{display:flex;gap:12px;align-items:flex-start;justify-content:space-between;border:2px solid var(--ink);border-left-width:8px;border-left-color:var(--hl);background:#fff;border-radius:4px;padding:12px 14px;margin-bottom:10px}
+.bul p{margin:0;font-size:15px}.bul .ghost{color:var(--ink);border-width:2px}
+.checks{list-style:none;padding:0;margin:8px 0 0;font-size:13px}
+.intel{display:grid;gap:18px;padding:6px}
+@media(min-width:760px){.intel{grid-template-columns:repeat(4,1fr)}}
+.intel .card{margin:0;background:var(--hl);transform:rotate(-1deg)}
+.intel .card:nth-child(2){background:var(--mint);transform:rotate(1deg)}.intel .card:nth-child(3){background:var(--lilac);transform:rotate(-.6deg)}.intel .card:nth-child(4){background:#ffc9c0;transform:rotate(1.2deg)}
+.intel b{font:700 2.8rem/1 var(--serif);display:block;margin-bottom:6px}.intel p{margin:0;font-size:14px}
+.pro{position:relative;background:var(--hl);border:2px solid var(--ink);border-radius:6px;box-shadow:9px 9px 0 var(--ink);padding:30px;margin:54px 0 44px;display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center}
+.pro h2{margin:0 0 6px}.pro p{margin:0;max-width:32em}
+.pro::after{content:"PRO";position:absolute;right:-8px;top:-18px;background:var(--ink);color:var(--hl);font:700 12px var(--mono);letter-spacing:.14em;padding:4px 12px;transform:rotate(5deg)}
+.pro .btn{background:var(--ink);color:var(--hl);box-shadow:none}
+.disc{font-size:14px;border:2px solid var(--ink);background:var(--warnbg);padding:12px 16px;border-radius:6px;margin:16px 0 0}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{font:700 11px var(--mono);letter-spacing:.1em;text-transform:uppercase}
+th,td{text-align:left;padding:10px 8px;border-bottom:2px solid var(--ink);vertical-align:top}
+.tw{overflow-x:auto}
+.seo{padding:10px 0 20px}.seo section{margin-bottom:26px}.seo h2{font-size:1.5rem}.seo p{color:var(--mute);margin:0 0 8px;max-width:46em}
+footer{background:var(--ink);color:#cfc8ba;padding:24px 0;font-size:13px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+.drop{cursor:pointer}.drop:hover{background:var(--hl)}.drop small{display:block}
+
+header nav{display:flex!important;gap:22px}header nav a[aria-current]{color:var(--hl)}
+@media(max-width:699px){header .wrap{height:auto;padding-block:10px;flex-wrap:wrap}header nav{order:3;width:100%;overflow-x:auto;white-space:nowrap;gap:18px}}
+.pg{font-size:clamp(2rem,6vw,3.4rem);line-height:1.05;margin:0 0 12px}
+.art{max-width:760px;padding-top:30px;padding-bottom:20px}.art h1{font-size:clamp(2rem,6vw,3.2rem);line-height:1.05;margin:0 0 14px}
+.art h2{font-size:1.6rem;margin:30px 0 8px}.art p,.art li{font-size:1.05rem}.art ol,.art ul{padding-left:22px}
+.crumbs{font:600 12px var(--mono);color:var(--mute);margin-bottom:14px}.crumbs a{text-decoration:none}
+.cta2{background:var(--hl);margin-top:36px}
+.glist{display:grid;gap:18px}@media(min-width:760px){.glist{grid-template-columns:1fr 1fr}}
+.glist a{text-decoration:none}.glist .card{margin:0;height:100%}.glist .card:hover{background:var(--hl)}
+.faq details{border:2px solid var(--ink);border-radius:6px;background:#fffdf7;padding:12px 16px;margin-bottom:10px}.faq summary{font-weight:700;cursor:pointer}
+.flinks{display:flex;flex-wrap:wrap;gap:8px 22px;margin-bottom:10px}.flinks a{color:#cfc8ba}
+</style>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Crect width='28' height='28' rx='6' fill='%23ffe24a'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#15120f">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Shortlist"><meta property="og:title" content="Free CV & Resume Keyword Checker: Match Your CV to a Job"><meta property="og:description" content="Free CV and resume keyword checker. Paste your CV and a job description to see missing keywords and a transparent match score. Private, in your browser."><meta property="og:url" content="https://byshak.github.io/cv-job-match-analyzer/">
+<meta name="twitter:card" content="summary_large_image"><meta property="og:image" content="https://byshak.github.io/cv-job-match-analyzer/og-image.png"><meta name="twitter:image" content="https://byshak.github.io/cv-job-match-analyzer/og-image.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Shortlist CV Job Match Analyzer", "applicationCategory": "BusinessApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "description": "Free in-browser CV and resume keyword checker that compares your CV with a job description."}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is my CV uploaded or stored?", "acceptedAnswer": {"@type": "Answer", "text": "No. Everything runs in your browser. Your CV and the job description are not sent to a server and nothing is saved. PDF reading loads the pdf.js library, but the file itself stays on your device."}}, {"@type": "Question", "name": "Does a high score guarantee ATS approval?", "acceptedAnswer": {"@type": "Answer", "text": "No. Results are guidance only. Every employer and ATS behaves differently, and this tool does not simulate any of them."}}, {"@type": "Question", "name": "How is the match score calculated?", "acceptedAnswer": {"@type": "Answer", "text": "Keyword and skill coverage is 50%, key phrases 20%, job title alignment 15% and experience signals 15%. See the full method on the how scoring works page."}}, {"@type": "Question", "name": "Which files can I import?", "acceptedAnswer": {"@type": "Answer", "text": "PDF, DOCX and TXT. Scanned PDFs without selectable text are not supported yet."}}]}</script>
+</head>
+<body>
+<header><div class="wrap"><a class="logo" href="index.html"><svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><rect width="28" height="28" rx="6" fill="#ffe24a"/><path d="M8 9h7M8 14h5M8 19h4" stroke="#15120f" stroke-width="2" stroke-linecap="round"/><path d="M15 17.5l2.5 2.5 5-6" stroke="#15120f" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Shortlist</a><nav aria-label="Main"><a href="index.html#tool" aria-current="page">Analyzer</a><a href="guides.html">Guides</a><a href="match-intelligence.html">Intelligence</a><a href="how-scoring.html">Scoring</a></nav><a class="btn sm" href="index.html#tool">Try it free</a></div></header>
+<main id="top">
+<section class="hero"><div class="wrap hg">
+<div>
+<p class="eyebrow">Free · Private · No sign-up</p>
+<h1>Find the <span class="mk">gaps</span> between your CV and the job.</h1>
+<p class="lead">A free CV and resume keyword checker. Paste your CV and a job description to see missing keywords, a transparent match score and bullet suggestions. Everything stays in your browser.</p>
+<div class="cta"><a class="btn" href="#tool">Analyze my CV</a><a class="ghost" href="how-scoring.html">See the formula</a></div>
+</div>
+<div class="desk" aria-hidden="true">
+<div class="paper p1"><h4>Job post</h4><p>We need a <mark class="h">React</mark> developer who knows <mark class="h">TypeScript</mark>, <mark class="m">Docker</mark> and <mark class="h">Agile</mark> ways of working.</p></div>
+<div class="paper p2"><h4>Your CV</h4><p>Built dashboards in React. Delivered features with Agile teams and wrote clean JavaScript.</p><span class="tick">✓ matched</span></div>
+<div class="stk">+ Docker<br>missing</div>
+</div>
+</div></section>
+<div class="strip" aria-hidden="true"><div>KEYWORDS ✦ PHRASES ✦ JOB TITLE ✦ EVIDENCE ✦ KEYWORDS ✦ PHRASES ✦ JOB TITLE ✦ EVIDENCE ✦ KEYWORDS ✦ PHRASES ✦ JOB TITLE ✦ EVIDENCE ✦ KEYWORDS ✦ PHRASES ✦ JOB TITLE ✦ EVIDENCE ✦ KEYWORDS ✦ PHRASES ✦ JOB TITLE ✦ EVIDENCE ✦ KEYWORDS ✦ PHRASES ✦ JOB TITLE ✦ EVIDENCE ✦ KEYWORDS ✦ PHRASES ✦ JOB TITLE ✦ EVIDENCE ✦ KEYWORDS ✦ PHRASES ✦ JOB TITLE ✦ EVIDENCE ✦ </div></div>
+
+<div class="wrap">
+<section class="blk" id="tool" aria-labelledby="tool-h">
+<p class="eyebrow">01 — Analyzer</p>
+<h2 id="tool-h">Put them side by side</h2>
+<p class="sub">Add both texts, then run the analysis.</p>
+<div class="grid2">
+<div class="panel">
+<div class="ph"><span class="n">1</span><label for="cv">Your CV</label><small id="cvc">0 words</small></div>
+<div class="pb"><div class="drop" id="drop" tabindex="0" role="button" aria-label="Upload CV file"><strong>Drop your CV here or click to browse</strong><small>PDF, DOCX or TXT. Read in your browser, never uploaded.</small><input type="file" id="cvf" accept=".pdf,.docx,.txt,.md" hidden></div>
+<textarea id="cv" placeholder="Paste your CV as plain text…"></textarea></div>
+</div>
+<div class="panel jd">
+<div class="ph"><span class="n">2</span><label for="jd">Job description</label><small id="jdc">0 words</small></div>
+<div class="pb"><div class="drop" id="drop2" tabindex="0" role="button" aria-label="Upload job description file"><strong>Drop your job description here or click to browse</strong><small>PDF, DOCX or TXT. Read in your browser, never uploaded.</small><input type="file" id="jdf" accept=".pdf,.docx,.txt,.md" hidden></div><textarea id="jd" style="min-height:240px" placeholder="Paste the full job advert, including the title and requirements…"></textarea></div>
+</div>
+</div>
+<div class="actions">
+<button class="btn" id="go" type="button">Analyze match →</button>
+<button class="ghost" id="sample" type="button">Load sample data</button>
+<button class="ghost" id="clear" type="button">Clear</button>
+<span id="msg" role="alert"></span>
+</div>
+</section>
+
+<section class="blk" aria-labelledby="res-h">
+<p class="eyebrow">02 — Report</p>
+<h2 id="res-h">Your match report</h2>
+<div class="empty" id="empty"><div class="r" aria-hidden="true"></div><p id="emsg">Paste both texts and press Analyze match, or load the sample data to see a full example.</p></div>
+<div id="results" tabindex="-1">
+<div class="card dark">
+<div class="top">
+<div class="ring" role="img" aria-label="Match score"><svg width="170" height="170" viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="10"/><circle id="arc" cx="60" cy="60" r="52" fill="none" stroke="#ffe24a" stroke-width="10" stroke-linecap="round" stroke-dasharray="326.7" stroke-dashoffset="326.7"/></svg><div class="num"><span id="score">0</span><small>OUT OF 100</small></div></div>
+<div><span class="band" id="band"></span><p id="summary" style="margin:0 0 4px"></p><p class="note" id="titleNote"></p></div>
+</div>
+<div class="stats">
+<div class="stat"><b id="st1">–</b><span>Keywords found</span></div>
+<div class="stat"><b id="st2">–</b><span>Phrases found</span></div>
+<div class="stat"><b id="st3">–</b><span>CV words</span></div>
+<div class="stat"><b id="st4">–</b><span>Evidence checks</span></div>
+</div>
+<div id="rows"></div>
+</div>
+<div class="card"><h3>Job description, marked up</h3><p class="note" style="margin:0 0 12px"><mark class="h">Highlighted</mark> = keyword your CV has. <mark class="m">Wavy red</mark> = keyword your CV is missing.</p><div class="heat" id="heat"></div></div>
+<div class="card"><h3>Missing keywords</h3><ul class="chips miss" id="miss"></ul><p class="note">Bold pills are recognised skills and tools and count double. Only add what honestly reflects your experience.</p></div>
+<div class="card"><h3>Keywords already present</h3><ul class="chips have" id="have"></ul></div>
+<div class="card"><h3>Improvement suggestions</h3><ul class="list" id="tips"></ul></div>
+<div class="card"><h3>Improved bullet examples</h3><p class="note" style="margin:0 0 12px">Templates built from your missing keywords. Replace the [brackets] with real details and use only what is true.</p><div id="bullets"></div></div>
+</div>
+</section>
+
+<section class="blk"><p class="eyebrow">Learn</p><h2>CV and resume guides</h2><div class="glist"><a href="tailor-cv-to-job.html"><div class="card"><h3>How to tailor your CV to a job description</h3><p class="note">A CV that mirrors the language of the job is easier to shortlist, for people and for software. Tailoring does not mean…</p></div></a><a href="ats-resume-keywords.html"><div class="card"><h3>ATS resume keywords: how to find and use them</h3><p class="note">Applicant tracking systems (ATS) store and search job applications, and many employers also search by keyword. No tool, including…</p></div></a><a href="cv-bullet-points.html"><div class="card"><h3>How to write strong CV bullet points</h3><p class="note">Strong bullets show what you did, how you did it and what changed because of it. Recruiters skim, so every line has to earn its…</p></div></a><a href="cv-vs-resume.html"><div class="card"><h3>CV vs resume: what is the difference?</h3><p class="note">The words are often used interchangeably, but the meaning depends on where you are…</p></div></a></div><p class="note"><a href="how-scoring.html">How scoring works</a> · <a href="match-intelligence.html">Match intelligence</a></p></section><section class="blk faq" aria-labelledby="faq-h"><p class="eyebrow">Questions</p><h2 id="faq-h">Frequently asked questions</h2><details><summary>Is my CV uploaded or stored?</summary><p>No. Everything runs in your browser. Your CV and the job description are not sent to a server and nothing is saved. PDF reading loads the pdf.js library, but the file itself stays on your device.</p></details><details><summary>Does a high score guarantee ATS approval?</summary><p>No. Results are guidance only. Every employer and ATS behaves differently, and this tool does not simulate any of them.</p></details><details><summary>How is the match score calculated?</summary><p>Keyword and skill coverage is 50%, key phrases 20%, job title alignment 15% and experience signals 15%. See the full method on the how scoring works page.</p></details><details><summary>Which files can I import?</summary><p>PDF, DOCX and TXT. Scanned PDFs without selectable text are not supported yet.</p></details></section><section class="pro" aria-label="Premium">
+<div><h2>Shortlist Pro is coming</h2><p>Saved applications, OCR for scanned PDFs, deeper role analysis and guided CV rewriting. Be first to know.</p></div>
+<button class="btn" type="button" id="wait">Join the waitlist</button>
+</section></div></main>
+<footer><div class="wrap"><div class="flinks"><a href="index.html">Analyzer</a><a href="guides.html">Guides</a><a href="match-intelligence.html">Match intelligence</a><a href="how-scoring.html">How scoring works</a></div>Shortlist V1 · Free, local and private. Guidance only; no ATS guarantee.</div></footer>
+<script>(function(){
+"use strict";
+var $=function(id){return document.getElementById(id)};
+
+/* ---------- Word lists ---------- */
+var STOP=new Set(("a an the and or but if of to in on at by for with from as is are was were be been being this that these those it its we you your our their they he she i will would can could should may might must shall do does did have has had not no nor so than then too very just also into over under about across per via etc able including include such who whom which what when where while within without us me my more most other any all each both new strong good great excellent ability responsible responsibilities required requirements preferred looking join role position candidate candidates work working works team teams company experience experienced years year skills skill knowledge understanding plus using use used environment opportunity ensure support help develop developing between through well high based related working across ideal successful day us full time part").split(" "));
+
+var SKILLS=("javascript|typescript|python|java|c++|c#|golang|rust|php|ruby|swift|kotlin|sql|nosql|html|css|react|angular|vue|node.js|express|django|flask|spring|laravel|.net|aws|azure|gcp|docker|kubernetes|terraform|ci/cd|jenkins|git|github|linux|rest|graphql|api|mongodb|postgresql|mysql|redis|tableau|power bi|excel|looker|machine learning|data analysis|data science|deep learning|nlp|tensorflow|pytorch|pandas|numpy|spark|hadoop|etl|agile|scrum|kanban|jira|figma|photoshop|ux|ui|seo|sem|google analytics|content marketing|social media|email marketing|crm|salesforce|hubspot|sap|erp|project management|stakeholder management|leadership|communication|negotiation|budgeting|forecasting|financial analysis|accounting|quickbooks|auditing|compliance|gdpr|customer service|customer success|sales|b2b|b2c|lead generation|recruitment|payroll|testing|qa|selenium|cypress|jest|microservices|devops|cybersecurity|networking|ios|android|flutter|react native|wordpress|shopify|copywriting|branding|analytics|reporting|problem solving|time management|teamwork|presentation|research|mentoring|supply chain|logistics|procurement|operations|nursing|patient care|teaching|curriculum|responsive design|accessibility|performance optimization|code review|unit testing|next.js|nuxt|svelte|tailwind|bootstrap|sass|webpack|vite|redux|jquery|fastapi|nestjs|bash|powershell|ansible|prometheus|grafana|kafka|rabbitmq|elasticsearch|snowflake|bigquery|airflow|dbt|scikit-learn|llm|computer vision|data visualization|a/b testing|product management|roadmapping|user research|wireframing|prototyping|adobe xd|illustrator|after effects|video editing|canva|ppc|google ads|meta ads|conversion optimization|affiliate marketing|public relations|event planning|account management|business development|cold calling|customer support|inventory management|risk management|financial reporting|bookkeeping|ifrs|gaap|xero|clinical|pharmacy|triage|lesson planning|classroom management|six sigma|kaizen|quality control|health and safety|autocad|solidworks|revit|matlab|critical thinking|adaptability|collaboration|decision making|attention to detail|analytical").split("|");
+
+var VERBS="led managed built developed designed delivered created improved increased reduced launched implemented optimised optimized achieved analysed analyzed negotiated trained coordinated automated migrated drove owned streamlined established generated saved".split(" ");
+
+var TITLE_WORDS="Engineer|Developer|Manager|Analyst|Designer|Consultant|Specialist|Coordinator|Administrator|Director|Officer|Executive|Associate|Assistant|Accountant|Architect|Nurse|Teacher|Scientist|Marketer|Recruiter|Producer";
+
+/* ---------- Text helpers ---------- */
+/* Synonyms and abbreviations are rewritten to one canonical form before any matching */
+var SYN=[["js","javascript"],["ts","typescript"],["reactjs","react"],["nodejs","node.js"],["vuejs","vue"],["angularjs","angular"],["k8s","kubernetes"],["postgres","postgresql"],["mongo","mongodb"],["ml","machine learning"],["amazon web services","aws"],["google cloud platform","gcp"],["google cloud","gcp"],["ms excel","excel"],["microsoft excel","excel"],["power-bi","power bi"],["cicd","ci/cd"],["ci cd","ci/cd"],["user experience","ux"],["search engine optimization","seo"],["search engine optimisation","seo"],["customer relationship management","crm"],["quality assurance","qa"],["restful","rest"],["html5","html"],["css3","css"],["c sharp","c#"],["dotnet",".net"],["problem-solving","problem solving"],["team work","teamwork"],["large language models","llm"],["natural language processing","nlp"]];
+var SYNRE=SYN.map(function(p){return[new RegExp("(^|[^a-z0-9+#.])"+esc(p[0])+"(?![a-z0-9+#])","g"),"$1"+p[1]]});
+function norm(t){var s=" "+t.toLowerCase().replace(/[^a-z0-9+#.\/\- \n]/g," ").replace(/\s+/g," ")+" ";SYNRE.forEach(function(r){s=s.replace(r[0],r[1])});return s}
+function esc(s){return s.replace(/[.*+?^${}()|[\]\\\/]/g,"\\$&")}
+/* Does normalised text contain the term as a whole word (simple plural allowed)? */
+function has(n,term){
+  var plural=/[a-z0-9]$/.test(term)?"(?:s|es)?":"";
+  return new RegExp("(^|[^a-z0-9+#])"+esc(term)+plural+"(?![a-z0-9+#])").test(n);
+}
+function count(n,term){
+  var plural=/[a-z0-9]$/.test(term)?"(?:s|es)?":"";
+  var m=n.match(new RegExp("(^|[^a-z0-9+#])"+esc(term)+plural+"(?![a-z0-9+#])","g"));
+  return m?m.length:0;
+}
+function clean(tok){return tok.replace(/^[.\-\/]+|[.\-\/]+$/g,"")}
+function words(n){return n.split(" ").map(clean).filter(Boolean)}
+function isKeyword(w){return w.length>2&&!STOP.has(w)&&!/^\d+$/.test(w)}
+
+/* ---------- Analysis ---------- */
+function analyze(cvRaw,jdRaw){
+  var cvN=norm(cvRaw),jdN=norm(jdRaw);
+
+  /* 1. Keywords: recognised skills + frequent / technical-looking terms */
+  var cand={},multiParts=new Set();
+  SKILLS.forEach(function(s){
+    var c=count(jdN,s);
+    if(c>0){cand[s]={term:s,skill:true,score:3+c};if(s.indexOf(" ")>-1)s.split(" ").forEach(function(p){multiParts.add(p)})}
+  });
+  var skillSet=new Set(SKILLS),freq={};
+  words(jdN).forEach(function(w){
+    if(!isKeyword(w)||skillSet.has(w)||multiParts.has(w))return;
+    var k=w.replace(/(es|s)$/,function(m,_,o){return w.length>4&&!/ss$/.test(w)?"":m});
+    freq[k]=freq[k]||{term:w,n:0};freq[k].n++;
+  });
+  /* acronyms / tech-looking tokens in original case count even once */
+  var techLike=new Set((jdRaw.match(/\b[A-Z][A-Z0-9+#]{1,}\b|\b[A-Za-z]+[+#]{1,2}|\b[A-Za-z]+\.[a-z]{2,}\b/g)||[]).map(function(x){return x.toLowerCase()}));
+  Object.keys(freq).forEach(function(k){
+    var f=freq[k],t=techLike.has(f.term);
+    if(f.n>=2||t)if(!cand[f.term])cand[f.term]={term:f.term,skill:false,score:f.n+(t?2:0)};
+  });
+  var kws=Object.keys(cand).map(function(k){return cand[k]}).sort(function(a,b){return b.score-a.score}).slice(0,30);
+  kws.forEach(function(k){k.matched=has(cvN,k.term);k.w=k.skill?2:1});
+  var kwTotal=kws.reduce(function(s,k){return s+k.w},0);
+  var kwHit=kws.reduce(function(s,k){return s+(k.matched?k.w:0)},0);
+  var kwScore=kwTotal?kwHit/kwTotal:null;
+
+  /* 2. Phrases: two-word terms repeated in the job description */
+  var toks=words(jdN),bi={};
+  for(var i=0;i<toks.length-1;i++){
+    if(isKeyword(toks[i])&&isKeyword(toks[i+1])){var p=toks[i]+" "+toks[i+1];bi[p]=(bi[p]||0)+1}
+  }
+  var phrases=Object.keys(bi).filter(function(p){return bi[p]>=2}).sort(function(a,b){return bi[b]-bi[a]}).slice(0,10);
+  var phHit=phrases.filter(function(p){return has(cvN,p)});
+  var phScore=phrases.length?phHit.length/phrases.length:null;
+
+  /* 3. Title alignment */
+  var title=findTitle(jdRaw),tScore=null;
+  if(title){
+    var tn=norm(title),tw=words(tn).filter(isKeyword);
+    if(tw.length){tScore=has(cvN,tn.trim())?1:tw.filter(function(w){return has(cvN,w)}).length/tw.length}
+  }
+
+  /* 4. Experience / qualification signals */
+  var checks=[];
+  var yr=jdRaw.match(/(\d{1,2})\s*\+?\s*(?:-\s*\d+\s*)?(?:years?|yrs?)/i);
+  if(yr){
+    var need=+yr[1],cvY=cvYears(cvRaw);
+    checks.push({label:"Job asks for "+need+"+ years; CV shows "+(cvY?"about "+cvY:"no clear years"),pass:cvY>=need});
+  }
+  var edu=/bachelor|master|ph\.?d|doctorate|degree|bsc|msc|mba/i;
+  if(edu.test(jdRaw))checks.push({label:"Degree mentioned in the job and in your CV",pass:edu.test(cvRaw)});
+  var cert=/certif|licen[sc]e/i;
+  if(cert.test(jdRaw))checks.push({label:"Certification or licence mentioned in the job and in your CV",pass:cert.test(cvRaw)});
+  var nums=(cvRaw.match(/\d+(?:[.,]\d+)?\s?(?:%|k\b|m\b|\+)|[$£€]\s?\d/gi)||[]).length;
+  checks.push({label:"CV has measurable results ("+nums+" found, 3 needed)",pass:nums>=3});
+  var cvw=new Set(words(cvN)),vc=VERBS.filter(function(v){return cvw.has(v)}).length;
+  checks.push({label:"CV uses action verbs ("+vc+" found, 4 needed)",pass:vc>=4});
+  var eScore=checks.filter(function(c){return c.pass}).length/checks.length;
+
+  /* Weighted total; unmeasurable components share their weight */
+  var parts=[["Keyword / skill coverage",50,kwScore],["Important phrase coverage",20,phScore],["Job-title alignment",15,tScore],["Experience & qualification signals",15,eScore]];
+  var wSum=0,tot=0;
+  parts.forEach(function(p){if(p[2]!==null){wSum+=p[1];tot+=p[1]*p[2]}});
+  return{score:wSum?Math.round(tot/wSum*100):0,parts:parts,kws:kws,phrases:phrases,phHit:phHit,title:title,checks:checks,cvWords:cvRaw.trim().split(/\s+/).length,kwHit:kws.filter(function(k){return k.matched}).length,phrasesN:phrases.length};
+}
+
+function findTitle(raw){
+  var m=raw.match(/(?:job title|position|role|title)\s*[:\-–]\s*([^\n]{3,60})/i);
+  if(m)return m[1].trim();
+  var first=raw.split("\n").map(function(s){return s.trim()}).filter(Boolean)[0]||"";
+  if(first.length>3&&first.split(/\s+/).length<=8&&!/[.!?]$/.test(first))return first;
+  var t=raw.match(new RegExp("\\b((?:[A-Z][\\w+#.]*\\s+){0,3}(?:"+TITLE_WORDS+"))\\b"));
+  return t?t[1]:"";
+}
+function cvYears(raw){
+  var best=0,m,re=/(\d{1,2})\+?\s*(?:years?|yrs?)/gi;
+  while((m=re.exec(raw)))best=Math.max(best,+m[1]);
+  var ys=(raw.match(/\b(?:19|20)\d{2}\b/g)||[]).map(Number);
+  if(ys.length>=2){
+    var end=Math.max.apply(null,ys),now=new Date().getFullYear();
+    if(/present|current|now/i.test(raw))end=now;
+    best=Math.max(best,end-Math.min.apply(null,ys));
+  }
+  return best;
+}
+
+/* ---------- Suggestions & bullets ---------- */
+function suggestions(r){
+  var t=[],miss=r.kws.filter(function(k){return !k.matched}),ms=miss.filter(function(k){return k.skill});
+  if(ms.length)t.push("Add the skills you genuinely have to your skills section and summary: "+ms.slice(0,6).map(function(k){return k.term}).join(", ")+".");
+  if(miss.length-ms.length>0)t.push("Work in missing terms where they fit your real experience: "+miss.filter(function(k){return !k.skill}).slice(0,5).map(function(k){return k.term}).join(", ")+".");
+  var pm=r.phrases.filter(function(p){return r.phHit.indexOf(p)<0});
+  if(pm.length)t.push("Use the job's exact phrasing instead of synonyms: \""+pm.slice(0,4).join("\", \"")+"\".");
+  if(r.title)t.push("Mirror the target title ("+r.title+") in your headline or summary if it matches your level and background.");
+  r.checks.forEach(function(c){
+    if(c.pass)return;
+    if(/years/.test(c.label))t.push("State your total years of experience clearly in your summary and give dates for each role.");
+    else if(/Degree/.test(c.label))t.push("List your education clearly, including degree name and institution.");
+    else if(/Certification/.test(c.label))t.push("Add relevant certifications or licences, with the issuing body and year.");
+    else if(/measurable/.test(c.label))t.push("Add numbers to your bullets: %, money, time saved, team size, volume.");
+    else if(/action verbs/.test(c.label))t.push("Start bullets with strong action verbs such as led, built, delivered, reduced.");
+  });
+  if(r.cvWords<150)t.push("Your CV is very short. Add more detail about your recent roles and achievements.");
+  if(!t.length)t.push("Your CV already covers the job well. Tighten wording and make sure the strongest matching achievements appear first.");
+  return t;
+}
+function bullets(r){
+  var tpl=[
+    function(k){return "Used "+k+" to [describe task or project], improving [metric] by [X]% for [team/client]."},
+    function(k){return "Delivered [project or outcome] with "+k+", reducing [time/cost] by [X]%."},
+    function(k){return "Collaborated with [team] on "+k+" initiatives, resulting in [measurable result]."},
+    function(k){return "Led [initiative] applying "+k+", achieving [number] [outcome] within [timeframe]."}
+  ];
+  var ks=r.kws.filter(function(k){return !k.matched}).slice(0,4);
+  if(!ks.length)return["Led [project] that [achievement], delivering [X]% improvement in [metric] within [timeframe].","Streamlined [process] using [tool], saving [X] hours per [week/month]."];
+  return ks.map(function(k,i){return tpl[i%4](k.term)});
+}
+
+/* ---------- Job description heatmap ---------- */
+function heat(raw,kws){
+  var box=$("heat"),map={};box.textContent="";
+  kws.forEach(function(k){map[k.term]=k.matched});
+  var terms=kws.map(function(k){return k.term}).sort(function(a,b){return b.length-a.length});
+  if(!terms.length){box.textContent=raw;return}
+  var re=new RegExp("(^|[^a-z0-9+#])("+terms.map(esc).join("|")+")(?:s|es)?(?![a-z0-9+#])","gi"),last=0,m;
+  while((m=re.exec(raw))){
+    var s=m.index+m[1].length,e=m.index+m[0].length;
+    box.appendChild(document.createTextNode(raw.slice(last,s)));
+    box.appendChild(el("mark",map[m[2].toLowerCase()]?"hit":"miss",raw.slice(s,e)));
+    last=e;
+  }
+  box.appendChild(document.createTextNode(raw.slice(last)));
+}
+/* ---------- Rendering ---------- */
+function countUp(s){var n=$("score");if(matchMedia("(prefers-reduced-motion: reduce)").matches){n.textContent=s;return}var t0=null;(function f(t){if(t0===null)t0=t;var p=Math.min((t-t0)/1100,1);n.textContent=Math.round(s*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)})(performance.now())}
+function el(tag,cls,text){var e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e}
+
+function render(r){
+  var s=r.score,band=s>=75?["Strong match","var(--okbg)","var(--ok)"]:s>=55?["Moderate match","var(--warnbg)","var(--warn)"]:["Low match","var(--badbg)","var(--bad)"];
+  countUp(s);
+  var arc=$("arc");arc.style.stroke=band[2];arc.setAttribute("stroke-dashoffset",(326.7*(1-s/100)).toFixed(1));
+  var b=$("band");b.textContent=band[0];b.style.background=band[1];b.style.color=band[2];
+  $("summary").textContent="Your CV contains "+r.kwHit+" of the top "+r.kws.length+" keywords from this job"+(r.phrasesN?" and "+r.phHit.length+" of "+r.phrasesN+" repeated phrases":"")+". Details of each part are below.";
+  $("st1").textContent=r.kwHit+"/"+r.kws.length;$("st2").textContent=r.phrasesN?r.phHit.length+"/"+r.phrasesN:"–";$("st3").textContent=r.cvWords;$("st4").textContent=r.checks.filter(function(c){return c.pass}).length+"/"+r.checks.length;$("titleNote").textContent=r.title?"Detected job title: "+r.title:"No clear job title detected, so that part was skipped.";
+
+  var rows=$("rows");rows.textContent="";
+  r.parts.forEach(function(p,i){
+    var row=el("div","row"),h=el("div","h");
+    var pct=p[2]===null?null:Math.round(p[2]*100);
+    h.appendChild(el("span","",p[0]));h.appendChild(el("span","",pct===null?"Not measurable":pct+"% × "+p[1]+"% weight"));
+    row.appendChild(h);
+    var bar=el("div","bar");bar.setAttribute("role","presentation");var f=el("i");f.style.width=(pct||0)+"%";bar.appendChild(f);row.appendChild(bar);
+    if(i===3){var ul=el("ul","checks");r.checks.forEach(function(c){ul.appendChild(el("li","",(c.pass?"✔ ":"✘ ")+c.label))});row.appendChild(ul)}
+    rows.appendChild(row);
+  });
+
+  fill("miss",r.kws.filter(function(k){return !k.matched}),"None. Every top keyword is present.");
+  fill("have",r.kws.filter(function(k){return k.matched}),"No top keywords found yet.");
+
+  var tips=$("tips");tips.textContent="";suggestions(r).forEach(function(t){tips.appendChild(el("li","",t))});
+
+  var bx=$("bullets");bx.textContent="";
+  bullets(r).forEach(function(t){
+    var d=el("div","bul"),p=el("p","",t),btn=el("button","ghost small","Copy");btn.type="button";
+    btn.addEventListener("click",function(){copy(t,btn)});
+    d.appendChild(p);d.appendChild(btn);bx.appendChild(d);
+  });
+}
+function fill(id,list,empty){
+  var ul=$(id);ul.textContent="";
+  if(!list.length){ul.appendChild(el("li","",empty));return}
+  list.forEach(function(k){var li=el("li",k.skill?"sk":"",k.term);ul.appendChild(li)});
+}
+function copy(text,btn){
+  function done(){var o=btn.textContent;btn.textContent="Copied";setTimeout(function(){btn.textContent=o},1500)}
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(done,fallback)}else fallback();
+  function fallback(){var t=el("textarea");t.value=text;t.style.position="fixed";t.style.opacity="0";document.body.appendChild(t);t.select();try{document.execCommand("copy");done()}catch(e){}document.body.removeChild(t)}
+}
+
+/* ---------- File import (everything stays in the browser) ---------- */
+function u32(dv,o){return dv.getUint32(o,true)}
+/* DOCX is a ZIP: find word/document.xml, inflate it natively, strip the XML tags */
+async function readDocx(buf){
+  var dv=new DataView(buf),i=buf.byteLength-22,td=new TextDecoder();
+  while(i>=0&&u32(dv,i)!==0x06054b50)i--;
+  if(i<0)throw new Error("This does not look like a valid DOCX file.");
+  var n=dv.getUint16(i+10,true),p=u32(dv,i+16);
+  for(var k=0;k<n;k++){
+    var nl=dv.getUint16(p+28,true),name=td.decode(new Uint8Array(buf,p+46,nl));
+    if(name==="word/document.xml"){
+      var method=dv.getUint16(p+10,true),cs=u32(dv,p+20),lo=u32(dv,p+42);
+      var start=lo+30+dv.getUint16(lo+26,true)+dv.getUint16(lo+28,true),data=new Uint8Array(buf,start,cs),xml;
+      if(method===0)xml=td.decode(data);
+      else xml=await new Response(new Blob([data]).stream().pipeThrough(new DecompressionStream("deflate-raw"))).text();
+      return xml.replace(/<\/w:p>/g,"\n").replace(/<w:tab\/>/g," ").replace(/<w:br\/>/g,"\n").replace(/<[^>]+>/g,"").replace(/&lt;/g,"<").replace(/&gt;/g,">").replace(/&quot;/g,'"').replace(/&apos;/g,"'").replace(/&amp;/g,"&");
+    }
+    p+=46+nl+dv.getUint16(p+30,true)+dv.getUint16(p+32,true);
+  }
+  throw new Error("No text found in this DOCX.");
+}
+/* PDF: pdf.js is loaded from cdnjs only when a PDF is chosen; the file itself is never sent anywhere */
+function loadPdfJs(){
+  if(window.pdfjsLib)return Promise.resolve();
+  return new Promise(function(ok,no){
+    var base="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/",s=document.createElement("script");
+    s.src=base+"pdf.min.js";
+    s.onload=function(){window.pdfjsLib.GlobalWorkerOptions.workerSrc=base+"pdf.worker.min.js";ok()};
+    s.onerror=function(){no(new Error("Could not load the PDF reader (needs an internet connection). Paste the text instead."))};
+    document.head.appendChild(s);
+  });
+}
+async function readPdf(buf){
+  await loadPdfJs();
+  var pdf=await window.pdfjsLib.getDocument({data:buf}).promise,out="";
+  for(var i=1;i<=Math.min(pdf.numPages,10);i++){
+    var c=await (await pdf.getPage(i)).getTextContent();
+    out+=c.items.map(function(t){return t.str+(t.hasEOL?"\n":" ")}).join("")+"\n";
+  }
+  return out;
+}
+/* Connect a drop zone + hidden file input to a textarea */
+function wireDrop(dzId,fileId,taId){
+  var dz=$(dzId),fi=$(fileId),ta=$(taId),sm=dz.querySelector("small");
+  function fail(m){sm.textContent=m;sm.style.color="var(--bad)"}
+  async function take(f){
+    if(!f)return;
+    var ext=(f.name.split(".").pop()||"").toLowerCase();sm.style.color="";
+    if(f.size>5*1024*1024)return fail("File is over 5 MB. Paste the text instead.");
+    if(["pdf","docx","txt","md"].indexOf(ext)<0)return fail("Use a PDF, DOCX or TXT file (old .doc files are not supported).");
+    sm.textContent="Reading "+f.name+"…";
+    try{
+      var text=ext==="pdf"?await readPdf(await f.arrayBuffer()):ext==="docx"?await readDocx(await f.arrayBuffer()):await f.text();
+      text=text.replace(/[ \t]+\n/g,"\n").replace(/\n{3,}/g,"\n\n").trim();
+      if(text.length<30)return fail("No readable text found. Scanned files need OCR, which V1 does not do. Paste the text instead.");
+      ta.value=text;ta.dispatchEvent(new Event("input"));
+      sm.textContent="Loaded "+f.name+" ("+wc(text)+" words). Check it looks right.";
+    }catch(e){fail(e.message||"Could not read this file.")}
+  }
+  ["dragenter","dragover"].forEach(function(e){dz.addEventListener(e,function(ev){ev.preventDefault();dz.classList.add("on")})});
+  ["dragleave","drop"].forEach(function(e){dz.addEventListener(e,function(ev){ev.preventDefault();dz.classList.remove("on");if(e==="drop"&&ev.dataTransfer)take(ev.dataTransfer.files[0])})});
+  dz.addEventListener("click",function(){fi.click()});
+  dz.addEventListener("keydown",function(ev){if(ev.key==="Enter"||ev.key===" "){ev.preventDefault();fi.click()}});
+  fi.addEventListener("click",function(ev){ev.stopPropagation()});
+  fi.addEventListener("change",function(){take(fi.files[0]);fi.value=""});
+}
+/* ---------- Events ---------- */
+function wc(v){var t=v.trim();return t?t.split(/\s+/).length:0}
+function counts(){$("cvc").textContent=wc($("cv").value)+" words";$("jdc").textContent=wc($("jd").value)+" words"}
+$("cv").addEventListener("input",counts);$("jd").addEventListener("input",counts);
+
+$("go").addEventListener("click",function(){
+  var cv=$("cv").value,jd=$("jd").value,msg=$("msg");msg.textContent="";
+  if(wc(cv)<30){msg.textContent="Paste your CV first (at least 30 words).";$("cv").focus();return}
+  if(wc(jd)<20){msg.textContent="Paste the job description first (at least 20 words).";$("jd").focus();return}
+  var btn=$("go");btn.disabled=true;btn.textContent="Analyzing…";$("emsg").textContent="Comparing your CV with the job description…";
+  setTimeout(function(){
+    var res=$("results");$("arc").setAttribute("stroke-dashoffset","326.7");
+    $("empty").style.display="none";res.style.display="block";void res.offsetHeight;
+    var rr=analyze(cv,jd);render(rr);heat(jd,rr.kws);
+    btn.disabled=false;btn.textContent="Analyze match";$("emsg").textContent="Paste both texts and press Analyze match, or load the sample data to see a full example.";
+    res.focus();res.scrollIntoView({behavior:"smooth"});
+  },400);
+});
+$("clear").addEventListener("click",function(){$("cv").value="";$("jd").value="";$("msg").textContent="";$("results").style.display="none";$("empty").style.display="block";counts()});
+$("wait").addEventListener("click",function(){this.textContent="Thanks, not live yet"});
+
+/* Sample data (loaded only when the user clicks the button) */
+$("sample").addEventListener("click",function(){
+  $("cv").value="Jordan Smith\nFrontend Developer\n\nSummary\nFrontend developer with 4 years of experience building web apps with JavaScript, HTML and CSS. Worked in agile teams and collaborated with designers.\n\nExperience\nFrontend Developer, BrightApps (2021 - Present)\n- Built customer dashboards with React, improving page load time by 35%\n- Developed reusable UI components and wrote unit tests with Jest\n- Worked with REST APIs and Git for daily delivery\n- Reduced bug reports by 20% through code review\n\nJunior Web Developer, PixelWorks (2019 - 2021)\n- Created responsive websites for 12 small business clients\n- Improved SEO scores by 25%\n\nEducation\nBSc Computer Science, 2019";
+  $("jd").value="Senior Frontend Engineer\n\nWe are looking for a Senior Frontend Engineer with 5+ years of experience to join our product team.\n\nResponsibilities\n- Build and maintain responsive web applications using React and TypeScript\n- Work with GraphQL APIs and REST services\n- Improve web performance and accessibility across the product\n- Write unit testing and end-to-end tests with Cypress\n- Collaborate with designers in Figma and mentor junior developers\n- Use CI/CD pipelines and Git for continuous delivery\n\nRequirements\n- Strong JavaScript, TypeScript, HTML and CSS skills\n- Experience with React and state management\n- Knowledge of web performance optimization and accessibility standards\n- Bachelor's degree in Computer Science or equivalent\n- Experience working in agile teams";
+  counts();$("msg").textContent="";
+});
+wireDrop("drop","cvf","cv");wireDrop("drop2","jdf","jd");
+/* stop the browser opening a file that is dropped outside a drop zone */
+window.addEventListener("dragover",function(e){e.preventDefault()});window.addEventListener("drop",function(e){e.preventDefault()});
+})();
+</script>
+</body>
+</html>

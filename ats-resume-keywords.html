@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ATS Resume Keywords: How to Find and Use Them</title>
+<meta name="description" content="What ATS resume keywords are, where to find them in a job description, where to place them on your CV and the mistakes that hurt you.">
+<link rel="canonical" href="https://byshak.github.io/cv-job-match-analyzer/ats-resume-keywords.html">
+<style>
+:root{--paper:#f3eee3;--ink:#15120f;--hl:#ffe24a;--mint:#bdf0cf;--lilac:#d9d2ff;--ok:#0a6b3a;--okbg:#bdf0cf;--warn:#8a5200;--warnbg:#ffe9a8;--bad:#a8200d;--badbg:#ffc9c0;--mute:#5d564c;--serif:"Iowan Old Style","Palatino Linotype",Georgia,serif;--mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sh:5px 5px 0 var(--ink)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font:16px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:var(--paper) radial-gradient(rgba(21,18,15,.13) 1px,transparent 1px) 0 0/22px 22px;overflow-x:hidden}
+::selection{background:var(--hl)}
+.wrap{max-width:1040px;margin:0 auto;padding:0 18px}
+.sr{position:absolute;left:-9999px}
+a{color:inherit}
+:focus-visible{outline:3px solid #2b50ff;outline-offset:2px}
+header{position:sticky;top:0;z-index:20;background:rgba(21,18,15,.92);color:var(--paper);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:12px}
+.logo{display:flex;align-items:center;gap:10px;font:700 1.3rem var(--serif);text-decoration:none}
+nav{display:none;gap:26px;font:600 12px var(--mono);letter-spacing:.1em;text-transform:uppercase}
+nav a{color:#cfc8ba;text-decoration:none}nav a:hover{color:var(--hl)}
+@media(min-width:700px){nav{display:flex}}
+.btn{display:inline-block;background:var(--hl);color:var(--ink);border:2px solid var(--ink);box-shadow:4px 4px 0 var(--ink);padding:13px 26px;font:700 15px/1.2 system-ui;border-radius:6px;text-decoration:none;cursor:pointer;transition:transform .15s,box-shadow .15s}
+.btn:hover:not(:disabled){transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}.btn:disabled{opacity:.6;cursor:wait}
+.btn.sm{padding:8px 16px;font-size:14px;border-color:var(--hl);box-shadow:none}
+.ghost{background:transparent;border:2px solid currentColor;color:inherit;padding:11px 20px;border-radius:6px;font:600 15px system-ui;cursor:pointer;text-decoration:none;display:inline-block}
+.ghost:hover{background:var(--hl);color:var(--ink);border-color:var(--ink)}.ghost.small{font-size:13px;padding:3px 12px}
+.hero{background:radial-gradient(50% 60% at 82% 20%,rgba(255,226,74,.13),transparent),var(--ink);color:var(--paper);padding:56px 0 110px;clip-path:polygon(0 0,100% 0,100% 93%,0 100%)}
+.hero .btn{border-color:var(--paper);box-shadow:4px 4px 0 var(--paper)}.hero .btn:hover{box-shadow:2px 2px 0 var(--paper)}
+.hg{display:grid;gap:8px}
+@media(min-width:880px){.hg{grid-template-columns:1.1fr .9fr;align-items:center}}
+.eyebrow{font:600 12px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin:0 0 6px}
+.hero .eyebrow{color:var(--hl)}
+h1,h2,h3{font-family:var(--serif);letter-spacing:-.02em}
+h1{font-size:clamp(2.7rem,9.5vw,5.4rem);line-height:.98;margin:0 0 22px;font-weight:700}
+h2{font-size:clamp(1.8rem,5vw,2.8rem);line-height:1.05;margin:0 0 10px}
+h3{font-size:1.2rem;margin:0 0 8px}
+.mk{display:inline-block;background:var(--hl);color:var(--ink);padding:0 .14em;transform:rotate(-2deg)}
+.lead{color:#cfc8ba;font-size:1.12rem;max-width:30em;margin:0 0 28px}
+.cta{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.desk{position:relative;height:330px;margin-top:34px}
+@media(min-width:880px){.desk{height:430px;margin:0}}
+.paper{position:absolute;background:#fffdf7;color:var(--ink);border:2px solid var(--ink);border-radius:4px;padding:16px;box-shadow:7px 7px 0 #4a4337}
+.paper h4{margin:0 0 8px;font:600 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.paper p{margin:0;font-size:14.5px;line-height:1.7}
+.p1{left:0;top:0;width:min(80%,310px);transform:rotate(-4deg);animation:b1 7s ease-in-out infinite}
+.p2{right:0;top:105px;width:min(76%,290px);transform:rotate(3deg);animation:b2 8s ease-in-out infinite}
+.tick{display:inline-block;margin-top:10px;background:var(--mint);border:2px solid var(--ink);border-radius:99px;padding:0 10px;font:700 12px var(--mono)}
+.stk{position:absolute;left:34%;bottom:4px;width:92px;height:92px;border-radius:50%;background:#ff5a36;color:#fff;border:2px solid var(--ink);display:grid;place-items:center;text-align:center;font:700 12px/1.3 var(--mono);transform:rotate(-12deg);animation:wob 5s ease-in-out infinite}
+mark.h,mark.hit{background:var(--hl);color:inherit;padding:0 2px;border-radius:2px}
+mark.m,mark.miss{background:var(--badbg);color:inherit;text-decoration:underline wavy #e5391f;text-underline-offset:3px;padding:0 2px}
+@keyframes b1{50%{transform:translateY(-12px) rotate(-3deg)}}
+@keyframes b2{50%{transform:translateY(10px) rotate(4deg)}}
+@keyframes wob{50%{transform:rotate(-4deg) scale(1.06)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes mq{to{transform:translateX(-50%)}}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}}
+@keyframes grow{from{width:0}}
+.strip{background:var(--hl);border-block:2px solid var(--ink);overflow:hidden;white-space:nowrap;font:700 13px var(--mono);letter-spacing:.16em;padding:8px 0;transform:rotate(-1deg);margin:-62px -12px 10px;position:relative;z-index:2}
+.strip div{display:inline-block;animation:mq 30s linear infinite}
+section.blk{padding:44px 0 6px}
+.sub{color:var(--mute);margin:0 0 22px;max-width:38em}
+.grid2{display:grid;gap:24px}
+@media(min-width:800px){.grid2{grid-template-columns:1fr 1fr}}
+.panel{background:#fffdf7;border:2px solid var(--ink);border-radius:6px;box-shadow:var(--sh);overflow:hidden}
+.ph{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:2px solid var(--ink);background:var(--hl)}
+.panel.jd .ph{background:var(--lilac)}
+.ph .n{width:26px;height:26px;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center;font:700 13px var(--mono)}
+.ph label{flex:1;font:700 12px var(--mono);letter-spacing:.12em;text-transform:uppercase}
+.ph small{font:600 12px var(--mono)}
+.pb{padding:14px}
+.drop{border:2px dashed var(--ink);border-radius:6px;padding:12px;text-align:center;margin-bottom:12px;color:var(--mute);font-size:14px;background:rgba(255,226,74,.12)}
+.drop strong{display:block;color:var(--ink)}.drop.on{background:var(--hl)}
+textarea{display:block;width:100%;min-height:240px;border:0;padding:0;background:repeating-linear-gradient(transparent 0 25px,rgba(21,18,15,.12) 25px 26px) local;color:var(--ink);font:15px/26px system-ui;resize:vertical}
+textarea:focus{outline:0}.pb:focus-within{box-shadow:inset 0 0 0 3px var(--hl)}
+textarea::placeholder{color:#8a8277}
+.actions{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin:26px 0 8px}
+.actions .ghost{color:var(--ink)}
+#msg{color:var(--bad);font-weight:600;font-size:14px}
+@media(max-width:560px){.actions .btn{width:100%}.actions .ghost{flex:1}}
+.empty{text-align:center;padding:40px 16px;border:2px dashed var(--ink);border-radius:6px;color:var(--mute);background:rgba(255,253,247,.6)}
+.empty .r{width:64px;height:64px;margin:0 auto 12px;border:3px dashed var(--ink);border-radius:50%;animation:spin 14s linear infinite}
+.empty p{margin:0 auto;max-width:28em}
+#results{display:none}
+.card{background:#fffdf7;border:2px solid var(--ink);border-radius:6px;box-shadow:var(--sh);padding:20px;margin-bottom:26px;animation:rise .5s ease-out both}
+@media(min-width:760px){.card{padding:26px}}
+.card.dark{background:var(--ink);color:var(--paper);box-shadow:5px 5px 0 var(--hl)}
+.dark .note,.dark .row .h span:last-child,.dark .checks{color:#cfc8ba}
+.top{display:grid;gap:20px;align-items:center}
+@media(min-width:760px){.top{grid-template-columns:200px 1fr}}
+.ring{position:relative;width:170px;height:170px;margin:0 auto}
+.ring svg{transform:rotate(-90deg)}
+#arc{transition:stroke-dashoffset 1.2s cubic-bezier(.2,.8,.2,1)}
+.ring .num{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;font:700 3.6rem/1 var(--serif)}
+.ring .num small{font:600 11px var(--mono);color:#cfc8ba;margin-top:4px}
+.band{display:inline-block;font:700 13px var(--mono);letter-spacing:.06em;text-transform:uppercase;border:2px solid var(--ink);border-radius:99px;padding:2px 14px;margin-bottom:10px}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:22px 0 6px}
+@media(min-width:760px){.stats{grid-template-columns:repeat(4,1fr)}}
+.stat{border:2px solid var(--ink);border-radius:6px;padding:12px 14px;color:var(--ink);background:var(--hl);animation:rise .6s ease-out both}
+.stat:nth-child(2){background:var(--mint)}.stat:nth-child(3){background:var(--lilac)}.stat:nth-child(4){background:#ffc9c0}
+.stat b{display:block;font:700 1.9rem var(--serif)}.stat span{font:600 11px var(--mono);letter-spacing:.06em;text-transform:uppercase}
+.row{margin:16px 0}
+.row .h{display:flex;justify-content:space-between;gap:8px;font-size:14px;font-weight:700}
+.row .h span:last-child{font-weight:400}
+.bar{height:10px;background:rgba(255,255,255,.16);border-radius:99px;overflow:hidden;margin:6px 0}
+.bar i{display:block;height:100%;background:var(--hl);border-radius:99px;animation:grow 1s ease-out}
+.heat{white-space:pre-wrap;font-size:14px;line-height:1.9;max-height:360px;overflow:auto;border:2px solid var(--ink);border-radius:6px;padding:14px;background:#fff}
+.chips{display:flex;flex-wrap:wrap;gap:10px;padding:0;margin:0;list-style:none}
+.chips li{font-size:13px;padding:2px 12px;border-radius:99px;border:2px solid var(--ink);background:#fff}
+.chips li.sk{font-size:15px;font-weight:700;padding:4px 14px;box-shadow:3px 3px 0 var(--ink)}
+.chips li.sk::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:currentColor;margin-right:8px;vertical-align:middle}
+.chips.miss li{background:var(--badbg);color:var(--bad);border-style:dashed}
+.chips.have li{background:var(--okbg);color:var(--ok)}
+.note{font-size:13px;color:var(--mute);margin:10px 0 0}
+ul.list{padding-left:20px;margin:0}ul.list li{margin-bottom:8px}
+.bul{display:flex;gap:12px;align-items:flex-start;justify-content:space-between;border:2px solid var(--ink);border-left-width:8px;border-left-color:var(--hl);background:#fff;border-radius:4px;padding:12px 14px;margin-bottom:10px}
+.bul p{margin:0;font-size:15px}.bul .ghost{color:var(--ink);border-width:2px}
+.checks{list-style:none;padding:0;margin:8px 0 0;font-size:13px}
+.intel{display:grid;gap:18px;padding:6px}
+@media(min-width:760px){.intel{grid-template-columns:repeat(4,1fr)}}
+.intel .card{margin:0;background:var(--hl);transform:rotate(-1deg)}
+.intel .card:nth-child(2){background:var(--mint);transform:rotate(1deg)}.intel .card:nth-child(3){background:var(--lilac);transform:rotate(-.6deg)}.intel .card:nth-child(4){background:#ffc9c0;transform:rotate(1.2deg)}
+.intel b{font:700 2.8rem/1 var(--serif);display:block;margin-bottom:6px}.intel p{margin:0;font-size:14px}
+.pro{position:relative;background:var(--hl);border:2px solid var(--ink);border-radius:6px;box-shadow:9px 9px 0 var(--ink);padding:30px;margin:54px 0 44px;display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center}
+.pro h2{margin:0 0 6px}.pro p{margin:0;max-width:32em}
+.pro::after{content:"PRO";position:absolute;right:-8px;top:-18px;background:var(--ink);color:var(--hl);font:700 12px var(--mono);letter-spacing:.14em;padding:4px 12px;transform:rotate(5deg)}
+.pro .btn{background:var(--ink);color:var(--hl);box-shadow:none}
+.disc{font-size:14px;border:2px solid var(--ink);background:var(--warnbg);padding:12px 16px;border-radius:6px;margin:16px 0 0}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{font:700 11px var(--mono);letter-spacing:.1em;text-transform:uppercase}
+th,td{text-align:left;padding:10px 8px;border-bottom:2px solid var(--ink);vertical-align:top}
+.tw{overflow-x:auto}
+.seo{padding:10px 0 20px}.seo section{margin-bottom:26px}.seo h2{font-size:1.5rem}.seo p{color:var(--mute);margin:0 0 8px;max-width:46em}
+footer{background:var(--ink);color:#cfc8ba;padding:24px 0;font-size:13px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+.drop{cursor:pointer}.drop:hover{background:var(--hl)}.drop small{display:block}
+
+header nav{display:flex!important;gap:22px}header nav a[aria-current]{color:var(--hl)}
+@media(max-width:699px){header .wrap{height:auto;padding-block:10px;flex-wrap:wrap}header nav{order:3;width:100%;overflow-x:auto;white-space:nowrap;gap:18px}}
+.pg{font-size:clamp(2rem,6vw,3.4rem);line-height:1.05;margin:0 0 12px}
+.art{max-width:760px;padding-top:30px;padding-bottom:20px}.art h1{font-size:clamp(2rem,6vw,3.2rem);line-height:1.05;margin:0 0 14px}
+.art h2{font-size:1.6rem;margin:30px 0 8px}.art p,.art li{font-size:1.05rem}.art ol,.art ul{padding-left:22px}
+.crumbs{font:600 12px var(--mono);color:var(--mute);margin-bottom:14px}.crumbs a{text-decoration:none}
+.cta2{background:var(--hl);margin-top:36px}
+.glist{display:grid;gap:18px}@media(min-width:760px){.glist{grid-template-columns:1fr 1fr}}
+.glist a{text-decoration:none}.glist .card{margin:0;height:100%}.glist .card:hover{background:var(--hl)}
+.faq details{border:2px solid var(--ink);border-radius:6px;background:#fffdf7;padding:12px 16px;margin-bottom:10px}.faq summary{font-weight:700;cursor:pointer}
+.flinks{display:flex;flex-wrap:wrap;gap:8px 22px;margin-bottom:10px}.flinks a{color:#cfc8ba}
+</style>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Crect width='28' height='28' rx='6' fill='%23ffe24a'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#15120f">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Shortlist"><meta property="og:title" content="ATS Resume Keywords: How to Find and Use Them"><meta property="og:description" content="What ATS resume keywords are, where to find them in a job description, where to place them on your CV and the mistakes that hurt you."><meta property="og:url" content="https://byshak.github.io/cv-job-match-analyzer/ats-resume-keywords.html">
+<meta name="twitter:card" content="summary_large_image"><meta property="og:image" content="https://byshak.github.io/cv-job-match-analyzer/og-image.png"><meta name="twitter:image" content="https://byshak.github.io/cv-job-match-analyzer/og-image.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "ATS resume keywords: how to find and use them", "description": "What ATS resume keywords are, where to find them in a job description, where to place them on your CV and the mistakes that hurt you.", "dateModified": "2026-10-07", "mainEntityOfPage": "https://byshak.github.io/cv-job-match-analyzer/ats-resume-keywords.html"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://byshak.github.io/cv-job-match-analyzer/"}, {"@type": "ListItem", "position": 2, "name": "Guides", "item": "https://byshak.github.io/cv-job-match-analyzer/guides.html"}, {"@type": "ListItem", "position": 3, "name": "ATS resume keywords: how to find and use them", "item": "https://byshak.github.io/cv-job-match-analyzer/ats-resume-keywords.html"}]}</script>
+</head>
+<body>
+<header><div class="wrap"><a class="logo" href="index.html"><svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><rect width="28" height="28" rx="6" fill="#ffe24a"/><path d="M8 9h7M8 14h5M8 19h4" stroke="#15120f" stroke-width="2" stroke-linecap="round"/><path d="M15 17.5l2.5 2.5 5-6" stroke="#15120f" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Shortlist</a><nav aria-label="Main"><a href="index.html#tool">Analyzer</a><a href="guides.html" aria-current="page">Guides</a><a href="match-intelligence.html">Intelligence</a><a href="how-scoring.html">Scoring</a></nav><a class="btn sm" href="index.html#tool">Try it free</a></div></header>
+<main id="top"><div class="wrap art"><div class="crumbs"><a href="index.html">Home</a> / <a href="guides.html">Guides</a> / ATS resume keywords: how to find and use them</div><p class="eyebrow">Guide</p><h1>ATS resume keywords: how to find and use them</h1><p class="sub" style="max-width:none">Applicant tracking systems (ATS) store and search job applications, and many employers also search by keyword. No tool, including ours, can promise how a specific system will treat your CV, but matching the advert's language helps.</p><h2>Where the keywords come from</h2><p>Almost always from the job description: skills, tools, qualifications and job titles. Terms repeated in the advert deserve the most attention.</p><h2>Hard skills and soft skills</h2><p>Hard skills such as SQL, Excel or React are easy to match. Soft skills such as leadership only help when you show evidence in a bullet point.</p><h2>Where to place keywords</h2><p>Use them in your summary, skills section, job titles and bullets. A keyword with proof beats a bare list. Write abbreviations both ways, for example "Search Engine Optimization (SEO)".</p><h2>Common mistakes</h2><ul><li>Keyword stuffing or hidden white text.</li><li>Putting key details in images, tables or text boxes that parsers may skip.</li><li>Unusual section headings instead of Experience and Education.</li></ul><h2>How to check your CV</h2><p>Run it through the <a href="index.html#tool">free keyword checker</a>, then read <a href="how-scoring.html">how the score is calculated</a>.</p><aside class="card cta2"><h3>Check your CV against a real job ad</h3><p>Free, private, and nothing is uploaded.</p><a class="btn" href="index.html#tool">Open the analyzer</a></aside><h2>More guides</h2><ul><li><a href="tailor-cv-to-job.html">How to tailor your CV to a job description</a></li><li><a href="cv-bullet-points.html">How to write strong CV bullet points</a></li><li><a href="cv-vs-resume.html">CV vs resume: what is the difference?</a></li></ul></div></main>
+<footer><div class="wrap"><div class="flinks"><a href="index.html">Analyzer</a><a href="guides.html">Guides</a><a href="match-intelligence.html">Match intelligence</a><a href="how-scoring.html">How scoring works</a></div>Shortlist V1 · Free, local and private. Guidance only; no ATS guarantee.</div></footer>
+</body>
+</html>

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://byshak.github.io/cv-job-match-analyzer/sitemap.xml
